@@ -1,1 +1,1 @@
-# python-php-sdk
+# eversend-python-sdk
