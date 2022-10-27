@@ -1,5 +1,4 @@
-from utils.configs import cache
-from eversend_wallets import Wallets
+from wallets import Wallets
 class Eversend:
     def __init__(self, client_id, client_secret):
         classes = (Wallets)
