@@ -1,2 +1,2 @@
-from api import API
-from exceptions import EversendError
+from eversend.utils.api import API
+from eversend.utils.exceptions import EversendError

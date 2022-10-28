@@ -17,11 +17,11 @@ setup(
     url="https://github.com/eversend/eversend-python-sdk",
     license="MIT",
     packages=find_packages(exclude=["tests", "tests.*"]),
-    python_requires=">=3.5",
+    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
     install_requires=[
         'requests >= 2.20; python_version >= "3.0"',
         'requests[security] >= 2.20; python_version < "3.0"',
-        'cache3',
+        'cachetools >=5.2.0',
 
     ],
     keywords=['eversend api payments'],

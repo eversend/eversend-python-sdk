@@ -1,11 +1,9 @@
 from __future__ import absolute_import
 import json
 from requests import request, exceptions
-from cache3 import SafeCache
+from cachetools import cached, TTLCache
 
 from eversend.utils.exceptions import EversendError
-
-cache = SafeCache()
 
 class API(object):
     BASE_URL = 'https://api.eversend.co/'
@@ -18,20 +16,19 @@ class API(object):
         self._version = version
         self._base_url = self.BASE_URL+version
     
+    @cached(cache=TTLCache(maxsize=1024, ttl=1600))
     def get_auth_token(self):
-        token = cache.get('__TOKEN__')
-        if not token:
-            response = request(
-                method='GET',
-                url=self._base_url+'/auth/token',
-                headers={'clientId': self._client_id,
-                'clientSecret': self._client_secret})
-            token = response.json()['token']
-            cache.set('__TOKEN__', token, 1600.0) #compensating for network lags in the timeout
+        response = request(
+            method='GET',
+            url=self._base_url+'/auth/token',
+            headers={'clientId': self._client_id,
+            'clientSecret': self._client_secret})
+        token = response.json()['token']
         return token
 
     def call_api(self, path, method='GET', params=None, data=None):
         token = self.get_auth_token()
+        print(token)
         url = self._base_url+path
         headers = {
             'authorization': 'Bearer '+token
