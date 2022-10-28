@@ -13,3 +13,4 @@ python:
 install:
   - pip install .
 script:
+  - make build

@@ -21,7 +21,7 @@ setup(
     install_requires=[
         'requests >= 2.20; python_version >= "3.0"',
         'requests[security] >= 2.20; python_version < "3.0"',
-        'cachetools >=5.2.0',
+        'cachetools',
 
     ],
     keywords=['eversend api payments'],
