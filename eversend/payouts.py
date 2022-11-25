@@ -34,6 +34,7 @@ class Payouts(API):
             bankCode=None,
             bankAccountName=None,
             bankAccountNumber=None,
+            transactionRef=None,
         ):
         payload = {
             'token': token,
@@ -56,4 +57,6 @@ class Payouts(API):
             payload['bankAccountName'] = bankAccountName
         if bankAccountNumber is not None:
             payload['bankAccountNumber'] = bankAccountNumber
+        if transactionRef is not None:
+            payload['transactionRef'] = transactionRef
         return self.call_api(path='/payouts', method='POST', data=payload)

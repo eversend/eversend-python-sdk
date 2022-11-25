@@ -18,10 +18,39 @@ class Beneficiaries(API):
             raise ValueError('beneficiaryId required')
         return self.call_api(path='/beneficiaries/'+str(beneficiaryId), method='GET')
     
-    def create(self, beneficiaries=None):
-        if not beneficiaries:
-            raise ValueError('beneficiaries object required')
-        return self.call_api(path='/beneficiaries', method='POST', data=beneficiaries)
+    def create(self,
+        firstName=None, 
+        lastName=None,
+        phoneNumber=None,
+        country=None,
+        bankName=None,
+        bankCode=None,
+        bankAccountName=None,
+        bankAccountNumber=None,
+    ):
+        if not firstName:
+            raise ValueError('firstName required')
+        if not lastName:
+            raise ValueError('lastName required')
+        if not phoneNumber:
+            raise ValueError('phoneNumber required')
+        if not country:
+            raise ValueError('country required')
+        payload = {
+            'firstName': firstName,
+            'lastName': lastName,
+            'phoneNumber': phoneNumber,
+            'country': country,
+        }
+        if bankName is not None:
+            payload['bankName'] = bankName
+        if bankCode is not None:
+            payload['bankCode'] = bankCode
+        if bankAccountName is not None:
+            payload['bankAccountName'] = bankAccountName
+        if bankAccountNumber is not None:
+            payload['bankAccountNumber'] = bankAccountNumber
+        return self.call_api(path='/beneficiaries', method='POST', data=[payload])
     
     def update(
             self, 
