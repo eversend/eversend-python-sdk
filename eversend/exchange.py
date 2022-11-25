@@ -18,10 +18,13 @@ class Exchange(API):
     def exchange(
             self,
             token=None,
+            transactionRef=None,
         ):
         if not token:
             raise ValueError('method required')
         payload = {
             'token': token
         }
+        if transactionRef is not None:
+            payload['transactionRef'] = transactionRef
         return self.call_api(path='/exchanges', method='post', data=payload)
